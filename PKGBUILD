@@ -1,32 +1,35 @@
 # Script generated with Bloom
-pkgdesc="ROS - @(Description)"
-@[if Homepage and Homepage != '']url='@(Homepage)'@[end if]
+pkgdesc="ROS - qt_gui_app provides the main to start an instance of the integrated graphical user interface provided by qt_gui."
+url='http://ros.org/wiki/qt_gui_app'
 
-pkgname='@(Package)'
-pkgver='@(Version)_@(Pkgrel)'
+pkgname='ros-kinetic-qt-gui-app'
+pkgver='0.3.8_1'
 pkgrel=1
 arch=('any')
-license=(@[for p in Licenses]'@p'@\n@[end for])
+license=('BSD'
+)
 
-makedepends=(@[for p in BuildDepends]'@p'@\n@[end for])
+makedepends=('ros-kinetic-catkin'
+)
 
-depends=(@[for p in Depends]'@p'@\n@[end for])
+depends=('ros-kinetic-qt-gui>=0.3.0'
+)
 
-conflicts=(@[for p in Conflicts]'@p'@\n@[end for])
-replaces=(@[for p in Replaces]'@p'@\n@[end for])
+conflicts=()
+replaces=()
 
-_dir=@(Name)
+_dir=qt_gui_app
 source=()
 md5sums=()
 
 prepare() {
-    cp -R $startdir/@(Name) $srcdir/@(Name)
+    cp -R $startdir/qt_gui_app $srcdir/qt_gui_app
 }
 
 build() {
   # Use ROS environment variables
   source /usr/share/ros-build-tools/clear-ros-env.sh
-  [ -f /opt/ros/@(ROSDistribution)/setup.bash ] && source /opt/ros/@(ROSDistribution)/setup.bash
+  [ -f /opt/ros/kinetic/setup.bash ] && source /opt/ros/kinetic/setup.bash
 
   # Create build directory
   [ -d ${srcdir}/build ] || mkdir ${srcdir}/build
@@ -39,7 +42,7 @@ build() {
   cmake ${srcdir}/${_dir} \
         -DCMAKE_BUILD_TYPE=Release \
         -DCATKIN_BUILD_BINARY_PACKAGE=ON \
-        -DCMAKE_INSTALL_PREFIX=/opt/ros/@(ROSDistribution) \
+        -DCMAKE_INSTALL_PREFIX=/opt/ros/kinetic \
         -DPYTHON_EXECUTABLE=/usr/bin/python2 \
         -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 \
         -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so \
